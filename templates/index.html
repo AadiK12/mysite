@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Online Desktop</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="scripts.js"></script>
+</head>
+<body onload="startTime()">
+    <div class="container">
+        <div class="top">
+            <div id="date">Hallo</div>
+            <h1>My Personal Desktop</h1>
+            <div id="clock"></div>
+        </div>
+        <div class="main">
+            <div class="widget">
+                <h3>Notepad</h3>
+                <div class="notepad">
+                    <textarea onload="loadNotes" id="note-area" name="message" rows="20" cols="40"></textarea>
+                </div>
+                <button id="saveNoteBtn">Save</button>
+            </div>
+            <div class="widget">
+                <img src='stockImage.jpg' class='stockImg'>
+            </div>
+            <div class="widget">
+                <h3>Widget 03</h3>
+            </div>
+        </div>
+    </div>
+</body>
+<style>
+    .stockImg{
+        width: 50%;
+        height: 50%;
+        border-radius: 10px;
+        margin-top: 60px;
+    }
+    body{
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color: beige;
+    margin: 0;
+}
+
+.container{
+    background-image: url("img/bg.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+
+}
+
+button{
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color: rgba(0, 0, 0, 0.8);
+    background-color: beige;
+    font-size: 18px;
+    border-radius: 5px;
+    padding: 5px 10px;
+    width: 70px;
+    border-style: none;
+    border: solid 2px beige;
+    margin-top: 10px;
+
+}
+
+button:hover{
+    background-color: rgba(0, 0, 0, 0.7);
+    color: beige;
+}
+
+
+.top{
+    background-color: rgba(0,0,0,0.5);
+    height: 10vh;
+    text-align: center;
+    padding: 10px;
+    border-radius: 10px;
+    margin: 0 20px;
+}
+
+#date{
+    position:absolute;
+    top:4vh;
+    left: 50px;
+    font-size: 20px;
+    border: 2px solid beige;
+    padding: 5px;
+    width: 120px;
+    border-radius: 5px;
+
+}
+
+#clock{
+    position:absolute;
+    top:4vh;
+    right: 50px;
+    font-size: 20px;
+    border: 2px solid beige;
+    padding: 5px;
+    width: 120px;
+    border-radius: 5px;
+
+}
+
+h1{
+    margin: auto;
+    margin-top: 2.8vh;
+}
+
+.main{
+    display: flex;
+    height: 90vh; 
+    max-width: 98vw;
+    margin: auto;
+}
+
+.widget{
+    height: 80vh;
+    background-color: rgba(0,0,0,0.4); 
+    margin: 8px;
+    padding: 5px;
+    padding-top: 0px;
+    width: 32%;
+    min-width: 300px;
+    text-align: center;
+    border-radius: 10px;
+}
+
+.notepad{
+    max-width: 30vw;
+    font-size: 20px;
+}
+
+#note-area{
+    font-size: 18px;
+    max-width: 28vw;
+    max-height: 58vh;
+    min-height: 25vh;
+    border-radius: 10px;
+}
+
+
+
+
+
+
+</style>
+<script>
+
+    /* --- FUNCTIONS --- */
+
+
+
+    /* --- MAIN CODE --- */
+
+    try {
+        var loadNotes = localStorage.getItem("notes");
+    }
+    catch(err) {
+            var loadNotes = "Enter your notes here and click 'Save'";
+    }
+
+    $("#note-area").val(loadNotes);
+
+    sp="/"
+    today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth()+1; //As January is 0.
+    var yyyy = today.getFullYear();
+
+    if(dd<10) dd='0'+dd;
+    if(mm<10) mm='0'+mm;
+
+    $("#date").html(mm+sp+dd+sp+yyyy);
+
+    $("#saveNoteBtn").click(function(){
+        var currentNotes = $("#note-area").val();
+        localStorage.setItem("notes", currentNotes);    
+    });
+
+</script>
+</html>
+
+<!--   console.log("notes: ", currentNotes);  -->
